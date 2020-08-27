@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.api.dao.EtlLoadMapper">
+
+    <insert id="insertOrReplace">
+        ${execType} into ${tableName}
+        <foreach collection="map.keys" index="index" item="key" open="(" close=")" separator=",">
+            ${key}
+        </foreach>
+        values
+        <foreach collection="data" item="map" separator=",">
+            <foreach collection="map.values" index="index" item="value" open="(" close=")" separator=",">
+                #{value}
+            </foreach>
+        </foreach>
+    </insert>
+
+    <update id="update">
+        update ${tableName} set
+        <foreach collection="map.keys" index="index" item="key" open="" close="" separator=",">
+            ${key}= #{map.${key}}
+        </foreach>
+        <where>
+            <foreach collection="conditionsList" item="conditions" separator="and">
+                ${conditions.columns} ${conditions.symbol} #{conditions.value}
+            </foreach>
+        </where>
+    </update>
+
+    <delete id="deleteInBatch">
+        delete from ${tableName} where ${columns} in
+        <foreach collection="conditionsValues" item="conditionsValue" open="(" close=")" separator=",">
+            #{conditionsValue}
+        </foreach>
+    </delete>
+
+    <delete id="deleteOrBatch">
+        delete from ${tableName}
+        <where>
+            <foreach collection="conditionsListBatch" item="conditionsList">
+                or
+                <foreach collection="conditionsList" item="conditions" open="(" close=")" separator="and">
+                    ${conditions.columns} ${conditions.symbol} #{conditions.value}
+                </foreach>
+            </foreach>
+        </where>
+    </delete>
+
+    <select id="selectByConditionIn" resultType="java.lang.Object">
+        select ${columns} from ${tableName} where ${columns} in
+        <foreach collection="conditionsValues" item="conditionsValue" open="(" close=")" separator=",">
+            #{conditionsValue}
+        </foreach>
+    </select>
+
+    <select id="selectByConditionOr" resultType="java.util.Map">
+        select
+        <foreach collection="conditionsListBatch.get(0)" item="conditions" separator=",">
+            ${conditions.columns}
+        </foreach>
+        from ${tableName}
+        <where>
+            <foreach collection="conditionsListBatch" item="conditionsList">
+                or
+                <foreach collection="conditionsList" item="conditions" open="(" close=")" separator="and">
+                    ${conditions.columns} ${conditions.symbol} #{conditions.value}
+                </foreach>
+            </foreach>
+        </where>
+    </select>
+</mapper>
