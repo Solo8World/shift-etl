@@ -31,7 +31,7 @@
 ### 三步实现
 
 1. **将接口信息录入etl_source表**  
-<img src="https://s1.ax1x.com/2020/10/10/0yCnQU.png" width="150%">  
+<img src="https://s1.ax1x.com/2020/10/10/0yCnQU.png">  
 
    etl_source表字段意义解释：  
 
@@ -92,7 +92,8 @@
 
 所以该示例需求下这么调用一下：
 ```java 
- EtlExtractService.executorClient("wenku-book",new ,null)
+ etlExtractService.executorClient("wenku-book",
+                 new HashMap<>(0),new HashMap<>(0));
 ```
 
 demo表嗷嗷待哺了同志们  
