@@ -113,12 +113,12 @@ ok继续
 <img src="https://s1.ax1x.com/2020/10/10/0yWgoR.png" width="100%">    
 第一条是一条因为数据过长加载失败的记录。第二条最后成功加载的记录。
 
-   etl_source_data表字段意义解释：  
+   etl_source_data表字段意义解释：   
    `source_key`:一个数据同步任务的自定义标识,无需赘述  
-   `source_data`:同步回来的源数据  
-   `processing_status`:数据处理/加载状态0-未处理1-处理中,2-处理完成 3-处理失败 
-   `action_date`:开始处理时间
-   `process_time`:处理及加载耗时(毫秒)，我这里网络不好所以耗时较长，正常百毫秒 
+   `source_data`:同步回来的源数据   
+   `processing_status`:数据处理/加载状态0-未处理1-处理中,2-处理完成 3-处理失败   
+   `action_date`:开始处理时间  
+   `process_time`:处理及加载耗时(毫秒)，我这里网络不好所以耗时较长，正常百毫秒  
    `process_result`:处理结果，处理状态失败的话这里会保存错误信息，便于排查  
 
 > 以上，啰嗦那么多其实操作就简单三步
