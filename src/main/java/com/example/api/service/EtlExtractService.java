@@ -4,6 +4,7 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.http.Method;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.example.api.common.Constants;
 import com.example.api.dao.EtlSourceDataMapper;
 import com.example.api.dao.EtlSourceMapper;
 import com.example.api.exception.ResultException;
@@ -19,8 +20,6 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-
-import static com.example.api.common.Constants.*;
 
 
 /**
@@ -40,7 +39,7 @@ public class EtlExtractService {
     private EtlSourceDataMapper etlSourceDataMapper;
 
     public void executorClient(@NotNull String sourceKey,
-                               @NotNull Map<String, Object> param,
+                               Map<String, Object> param,
                                Map<String, String> header) {
         final EtlSource etlSource = etlSourceMapper.selectEtlSourceByKey(sourceKey);
         if (ObjectUtils.isEmpty(etlSource)) {
@@ -51,13 +50,13 @@ public class EtlExtractService {
 
         final Integer resultProcessMethod = etlSource.getProcessMethod();
         etlSourceDataMapper.insert(new EtlSourceData(sourceKey, sourceData.toString(),
-                PROCESSING_STATUS_UNPROCESSED));
+                Constants.PROCESSING_STATUS_UNPROCESSED));
 
-        if (PROCESS_METHOD_SYNC.equals(resultProcessMethod)) {
+        if (Constants.PROCESS_METHOD_SYNC.equals(resultProcessMethod)) {
             etlProcessService.processSourceData(sourceKey);
         }
 
-        if (PROCESS_METHOD_ASYNC.equals(resultProcessMethod)) {
+        if (Constants.PROCESS_METHOD_ASYNC.equals(resultProcessMethod)) {
             CompletableFuture
                     .runAsync(() -> etlProcessService.processSourceData(sourceKey));
         }
@@ -92,13 +91,13 @@ public class EtlExtractService {
     private JSONObject exchangeBase(EtlSource etlSource,
                                     Map<String, Object> param,
                                     Map<String, String> header) {
-        if (CONTENT_TYPE_FORM == etlSource.getContentType()) {
+        if (Constants.CONTENT_TYPE_FORM == etlSource.getContentType()) {
             String result = new HttpRequest(etlSource.getSourceUrl())
                     .method(Method.valueOf(etlSource.getRequestMethod()))
                     .form(param)
                     .execute().body();
             return JSONUtil.parseObj(result);
-        } else if (CONTENT_TYPE_JSON == etlSource.getContentType()) {
+        } else if (Constants.CONTENT_TYPE_JSON == etlSource.getContentType()) {
             String result = new HttpRequest(etlSource.getSourceUrl())
                     .method(Method.valueOf(etlSource.getRequestMethod()))
                     .addHeaders(header)

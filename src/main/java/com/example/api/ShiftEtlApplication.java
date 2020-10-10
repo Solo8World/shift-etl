@@ -9,8 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ShiftEtlApplication {
 
+
     public static void main(String[] args) {
         SpringApplication.run(ShiftEtlApplication.class, args);
+
     }
 
 }

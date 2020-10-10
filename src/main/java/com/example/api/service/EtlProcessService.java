@@ -63,6 +63,7 @@ public class EtlProcessService {
         try {
             processSourceData(sourceKey, JSONUtil.parse(etlSourceData.getSourceData()));
         } catch (Exception e) {
+            e.printStackTrace();
             msg = e.toString();
             processStatus = PROCESSING_STATUS_FAIL;
         }
@@ -79,9 +80,9 @@ public class EtlProcessService {
      * @param result    json数据
      */
     public void processSourceData(String sourceKey, JSON result) {
-        final String replace = result.toString().replace("\"[", "[")
-                .replace("]\"", "]").replace("\\", "");
-        final JSON sourceDataJson = JSONUtil.parse(replace);
+/*        final String replace = result.toString().replace("\"[", "[")
+                .replace("]\"", "]").replace("\\", "");*/
+        final JSON sourceDataJson = JSONUtil.parse(result.toString());
         //查询当前接口映射规则
         final List<EtlDataProcessRule> processRules =
                 etlDataProcessRuleMapper.selectBySourceKey(sourceKey);

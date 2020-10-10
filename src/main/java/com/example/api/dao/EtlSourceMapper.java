@@ -20,10 +20,10 @@ public interface EtlSourceMapper {
      * @param key 标识
      * @return 实例对象
      */
-    @Select("    <script>\n" +
-            "            select\n" +
-            "              id,source_key, source_url, request_method, process_method,content_type, remark from etl_source\n" +
-            "            where source_key = #{key}\n" +
+    @Select("    <script>" +
+            "            select" +
+            "              id,source_key, source_url, request_method, process_method,content_type, remark from etl_source" +
+            "            where source_key = #{key}" +
             "            </script>" )
     EtlSource selectEtlSourceByKey(String key);
 
