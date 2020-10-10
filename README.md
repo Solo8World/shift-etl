@@ -28,10 +28,12 @@
 接口数据结构示例：  
 <img src="https://s1.ax1x.com/2020/10/10/0szB8O.png" width="150%">
 
+目标表表结构
+<img src="https://s1.ax1x.com/2020/10/10/0yDp5D.png" width="150%"> 
 ### 三步实现
 
 1. **将接口信息录入etl_source表**  
-<img src="https://s1.ax1x.com/2020/10/10/0yCnQU.png" width="300%">  
+<img src="https://s1.ax1x.com/2020/10/10/06nw4S.png" width="300%">  
 
    etl_source表字段意义解释：  
 
@@ -48,7 +50,7 @@
    `remark`： 自定义备注
 
 2.**将数据处理规则录入etl_data_process_rule表**   
-<img src="https://s1.ax1x.com/2020/10/10/0yENlt.png" width="150%">    
+<img src="https://s1.ax1x.com/2020/10/10/06uA58.png" width="150%">    
 
    etl_data_process_rule表字段意义解释：  
 
@@ -95,10 +97,8 @@
  etlExtractService.executorClient("wenku-book",
                  new HashMap<>(0),new HashMap<>(0));
 ```
-
-demo表嗷嗷待哺了同志们  
-<img src="https://s1.ax1x.com/2020/10/10/0yDp5D.png" width="150%">    
-
+ 
+   
 啊哦，肝到这里出了几个问题：  
 1.项目启动数据库一直连接不上，时区问题驱动版本问题都排查了个遍，最终在application配置文件上找到了原因：我们项目用的yml格式文件，
 yml对小数点的解析有问题，而我嫖阿里的rds密码正好就有一个小数点，害，yml改不了俺改。  
