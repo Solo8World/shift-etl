@@ -30,7 +30,7 @@
 
 ### 三步实现
 
-1. 将接口信息录入etl_source表  
+1. **将接口信息录入etl_source表**  
 <img src="https://s1.ax1x.com/2020/10/10/0yCnQU.png" width="100%">  
 
    etl_source表字段意义解释：  
@@ -47,7 +47,7 @@
  
     `remark`： 自定义备注
 
-2.将数据处理规则录入etl_data_process_rule表   
+2.**将数据处理规则录入etl_data_process_rule表**   
 <img src="https://s1.ax1x.com/2020/10/10/0yENlt.png" width="100%">    
 
    etl_data_process_rule表字段意义解释：  
@@ -79,7 +79,7 @@
 
    `remark`:自定义备注  
 
-3.调用EtlExtractService.executorClient执行数据同步  
+3.**调用EtlExtractService.executorClient执行数据同步**  
 ```java
   void executorClient(@NotNull String sourceKey,
                                  Map<String, Object> param,
@@ -105,7 +105,7 @@ yml对小数点的解析有问题，而我嫖阿里的rds密码正好就有一�
 3.`Data too long for column 'summary' at row 2`，源数据返回的书籍简介超长了，问题不大，加大加长demo表对应字段的长度
 
 ok继续  
-有了：  
+**有了**：  
 <img src="https://s1.ax1x.com/2020/10/10/0yRfKg.png" width="100%">    
 (看来大家都有一个发财梦)
 
