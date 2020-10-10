@@ -35,17 +35,17 @@
 
    etl_source表字段意义解释：  
 
-    `source_key`：一个数据同步任务的自定义标识，后面调用etl执行同步时会需要传入此标识  
+   `source_key`：一个数据同步任务的自定义标识，后面调用etl执行同步时会需要传入此标识  
 
-    `source_url`：接口全路径，支持https调用  
+   `source_url`：接口全路径，支持https调用  
 
-    `request_method`：接口请求方式，‘GET’，‘post’等，不区分大小写   
+   `request_method`：接口请求方式，‘GET’，‘post’等，不区分大小写   
 
-    `content_type`：接口传参类型，支持0:form、1:json、2:urlencoded传参  
+   `content_type`：接口传参类型，支持0:form、1:json、2:urlencoded传参  
 
-    `process_method`：接口数据处理方式，支持0:同步处理(同步进入数据处理及加载逻辑),1:异步处理(异步进入数据处理及加载逻辑),2:自定义处理(不进入数据处理及加载逻辑)  
+   `process_method`：接口数据处理方式，支持0:同步处理(同步进入数据处理及加载逻辑),1:异步处理(异步进入数据处理及加载逻辑),2:自定义处理(不进入数据处理及加载逻辑)  
  
-    `remark`： 自定义备注
+   `remark`： 自定义备注
 
 2.**将数据处理规则录入etl_data_process_rule表**   
 <img src="https://s1.ax1x.com/2020/10/10/0yENlt.png" width="100%">    
