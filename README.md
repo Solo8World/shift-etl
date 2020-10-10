@@ -31,7 +31,7 @@
 ### 三步实现
 
 1. **将接口信息录入etl_source表**  
-<img src="https://s1.ax1x.com/2020/10/10/0yCnQU.png">  
+<img src="https://s1.ax1x.com/2020/10/10/0yCnQU.png" width="200%">  
 
    etl_source表字段意义解释：  
 
