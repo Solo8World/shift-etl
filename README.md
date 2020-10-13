@@ -4,13 +4,9 @@
 这是一个相对简陋也非常轻量的ETL(Extract-Transform-Load)工具，
 如果你有数据接口对接的业务场景，你可以参考它。  
 
-它会以数据库配置的方式，帮助你实现数据接口对接，减少重复编码的工作量，
-同时可以随时灵活调整、降低后续业务调整带来的影响。
+它会以数据库配置的方式，帮助你实现数据接口对接，减少重复编码的工作量。同时可以随时灵活调整、降低后续业务调整带来的影响。
 
-它的核心代码只有三页,分别是
-[EtlExtractService](https://github.com/Solo8World/shift-etl/blob/master/src/main/java/com/example/api/service/EtlExtractService.java) (数据抽取类)、
-[EtlProcessService](https://github.com/Solo8World/shift-etl/blob/master/src/main/java/com/example/api/service/EtlProcessService.java) (数据处理类)、
-[EtlLoadService](https://github.com/Solo8World/shift-etl/blob/master/src/main/java/com/example/api/service/EtlLoadService.java) (数据加载类)；
+它的核心代码只有三页,分别是[EtlExtractService](https://github.com/Solo8World/shift-etl/blob/master/src/main/java/com/example/api/service/EtlExtractService.java) (数据抽取类)、[EtlProcessService](https://github.com/Solo8World/shift-etl/blob/master/src/main/java/com/example/api/service/EtlProcessService.java) (数据处理类)、[EtlLoadService](https://github.com/Solo8World/shift-etl/blob/master/src/main/java/com/example/api/service/EtlLoadService.java) (数据加载类)；
 
 ## 运行流程
 数据抽取(Extract) -> 数据处理(Transform) -> 数据加载(Load)
@@ -43,7 +39,7 @@
 
    `request_method`：接口请求方式，‘GET’，‘post’等，不区分大小写   
 
-   `content_type`：接口传参类型，支持0:form、1:json、2:urlencoded传参  
+   `content_type`：当前示例需求中并不需要。接口传参类型，支持0:form、1:json、2:urlencoded传参  
 
    `process_method`：接口数据处理方式，支持0:同步处理(同步进入数据处理及加载逻辑),1:异步处理(异步进入数据处理及加载逻辑),2:自定义处理(不进入数据处理及加载逻辑)  
  
@@ -59,11 +55,11 @@
 
    `data_key`:源数据json结构中字段位置，`data.list[].show_doc_id` 中，`[]`标识为数组  
 
-   `has_mapping`:当前示例需求中并不需要，该字段含义是`是否需要联查当前数据库中其他字段值来替换`，它应用的业务场景如：我们现有一张书籍分类表，源数据结构给了一个书籍分类字段"哲学"，而我们需要转换成分类表对应id并给demo_wenku_book存入。  
+   `has_mapping`:当前示例需求中并不需要。该字段含义是`是否需要联查当前数据库中其他字段值来替换`，它应用的业务场景如：我们现有一张书籍分类表，源数据结构给了一个书籍分类字段"哲学"，而我们需要转换成分类表对应id并给demo_wenku_book存入。  
 
-   `mapping_id`:当前示例需求中并不需要，业务场景同上，该字段用于指定联查操作（etl_data_process_mapping） 
+   `mapping_id`:当前示例需求中并不需要。业务场景同上，该字段用于指定联查操作（etl_data_process_mapping） 
 
-   `has_distinct`:是否需以此字段进行数据去重 
+   `has_distinct`:当前示例需求中并不需要。标识是否需以此字段进行数据去重 
 
    `target_table`:对应存入表表名，该示例需求下为demo_wenku_book   
 
@@ -71,13 +67,13 @@
 
    `default_value`:源数据字段值为空时的默认值，无默认值为null
 
-   `exec_sort`:该示例需求中并不需要，一个数据同步任务下支持多次数据处理操作，该字段指定了数据处理的执行顺序。业务场景如：先将源数据的书籍分类信息去重存入分类表，再将源数据的书籍信息存入书籍表   
+   `exec_sort`:该示例需求中并不需要。一个数据同步任务下支持多次数据处理操作，该字段指定了数据处理的执行顺序。业务场景如：先将源数据的书籍分类信息去重存入分类表，再将源数据的书籍信息存入书籍表   
 
    `exec_type`:数据处理后的加载操作类型，支持`insert`(新增),`replace`(替换),`update`(修改),`delete`(删除),`insert or update`(根据条件动态新增或修改),`java`(执行一段java函数)  
 
-   `is_condition`:该示例需求中并不需要，该字段的意义是`是否为条件字段`，条件字段应用于`update`、`delete`、`insert or update`操作类型。  
+   `is_condition`:该示例需求中并不需要。该字段的意义是`是否为条件字段`，条件字段应用于`update`、`delete`、`insert or update`操作类型。  
 
-   `condition_symbol`:该示例需求中并不需要，该字段的意义是`条件字段的比较符`，支持 `=``<``<=`。当操作类型为`java`时，该字段用于指明java函数的入参类型(String/Integer)  
+   `condition_symbol`:该示例需求中并不需要。该字段的意义是`条件字段的比较符`，支持 `=``<``<=`。当操作类型为`java`时，该字段用于指明java函数的入参类型(String/Integer)  
 
    `remark`:自定义备注  
 
@@ -89,8 +85,8 @@
 ```  
 方法参数:  
  `sourceKey`:一个数据同步任务的自定义标识  
- `param`:该示例需求中并不需要，接口请求参数，这个其实也可以做成动态自定义而无需硬编码的,看实际需求业务场景  
- `header`:该示例需求中并不需要，接口请求头部信息，同上  
+ `param`:该示例需求中并不需要。接口请求参数，这个其实也可以做成动态自定义而无需硬编码的,看实际需求业务场景  
+ `header`:该示例需求中并不需要。接口请求头部信息，同上  
 
 所以该示例需求下这么调用一下：
 ```java 
