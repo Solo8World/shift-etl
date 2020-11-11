@@ -8,7 +8,7 @@
 
 它的核心代码只有三页,分别是[EtlExtractService](https://github.com/Solo8World/shift-etl/blob/master/src/main/java/com/example/api/service/EtlExtractService.java) (数据抽取类)、[EtlProcessService](https://github.com/Solo8World/shift-etl/blob/master/src/main/java/com/example/api/service/EtlProcessService.java) (数据处理类)、[EtlLoadService](https://github.com/Solo8World/shift-etl/blob/master/src/main/java/com/example/api/service/EtlLoadService.java) (数据加载类)；
 
-更多信息可访问我的个人博客 https://leeblog.com
+更多信息可访问我的个人博客 https://leeblog.icu
 
 ## 运行流程
 数据抽取(Extract) -> 数据处理(Transform) -> 数据加载(Load)
